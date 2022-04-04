@@ -1,0 +1,14 @@
+<html>
+  <body>
+    <h1>Hello world!</h1>
+    <button id="print_button">Print</button>
+
+    <script>
+      const printBtn = document.getElementById("print_button");
+
+      printBtn.addEventListener("click", () => {
+        fetch("/click_print_button", { method: "POST" });
+      });
+    </script>
+  </body>
+</html>
