@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, jsonify
 from flask.templating import render_template
 from flask_cors import CORS
@@ -6,9 +5,9 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# http://localhost:5000/home
-@app.route("/home")
-def hello_world():
+
+@app.route("/")
+def index():
     return render_template('index.html')
 
 
@@ -16,6 +15,21 @@ def hello_world():
 def click_print_button():
     print("Click print button.")
     return jsonify({"success": True})
+
+
+@app.route("/get_users", methods=["GET"])
+def get_users():
+    from faker import Faker
+    fake = Faker()
+    data = []
+
+    for i in range(0, 1000):
+        data.append(fake.simple_profile())
+        
+    return jsonify({
+        "success": True,
+        "data": data
+    })
 
 
 app.run()
